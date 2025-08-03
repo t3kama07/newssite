@@ -8,9 +8,19 @@ permalink: "articles/{{ article.title | slug }}/index.html"
 ---
 <h2>{{ article.title }}</h2>
 {% if article.image_url %}
-<img src="{{ article.image_url }}" alt="">
+<img src="{{ article.image_url }}" alt="{{ article.title }}">
 {% endif %}
 <p>{{ article.description }}</p>
-<p><a href="{{ article.link }}" target="_blank">Read Original Source</a></p>
+<p><a href="{{ article.link }}" target="_blank" rel="noopener">Read Original Source</a></p>
 <small>Published: {{ article.pubDate }}</small>
+
+<hr>
+<h3>Related News</h3>
+<ul>
+{% for related in news | slice(0,5) %}
+  {% if related.title != article.title %}
+  <li><a href="/articles/{{ related.title | slug }}/">{{ related.title }}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>
 {% endfor %}
