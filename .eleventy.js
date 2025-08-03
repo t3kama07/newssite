@@ -5,7 +5,12 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
   // Date filters
-  eleventyConfig.addFilter("dateISO", dateObj => new Date(dateObj).toISOString().split('T')[0]);
+eleventyConfig.addFilter("dateISO", function(dateObj) {
+  if (!dateObj) return new Date().toISOString().split('T')[0];
+  const date = new Date(dateObj);
+  return isNaN(date) ? new Date().toISOString().split('T')[0] : date.toISOString().split('T')[0];
+});
+
   eleventyConfig.addFilter("date", () => new Date().toISOString().split('T')[0]);
   eleventyConfig.addFilter("year", () => new Date().getFullYear());
 

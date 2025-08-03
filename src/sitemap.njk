@@ -1,24 +1,24 @@
 ---
 permalink: sitemap.xml
 eleventyExcludeFromCollections: true
-layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{% for article in news %}
   <url>
-    <loc>{{ site.url }}/articles/{{ article.title | slug }}/</loc>
-    <lastmod>
-      {% if article.pubDate %}
-        {{ article.pubDate | dateISO }}
-      {% else %}
-        {{ "now" | dateISO }}
-      {% endif %}
-    </lastmod>
+    <loc>{{ site.url }}/</loc>
+    <lastmod>{{ "now" | dateISO }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
-{% endfor %}
-<url>
-  <loc>{{ site.url }}/</loc>
-  <lastmod>{{ "now" | dateISO }}</lastmod>
-</url>
+
+  {% for article in news %}
+    {% if article.pubDate %}
+    <url>
+      <loc>{{ site.url }}/articles/{{ article.title | slug }}/</loc>
+      <lastmod>{{ article.pubDate | dateISO }}</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.8</priority>
+    </url>
+    {% endif %}
+  {% endfor %}
 </urlset>
