@@ -46,11 +46,11 @@
   "datePublished": "{{ article.pubDate }}",
   "author": {
     "@type": "Organization",
-    "name": "Your News Site"
+    "name": "{{ site.name }}"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Your News Site",
+    "name": "{{ site.name }}",
     "logo": {
       "@type": "ImageObject",
       "url": "{{ site.url }}/logo.png"
@@ -59,17 +59,16 @@
 }
 </script>
 {% endif %}
-
 </head>
 <body>
 <header>
-  <h1><a href="{{ site.url }}/">Your News Site</a></h1>
+  <h1><a href="{{ site.url }}/">{{ site.name }}</a></h1>
 </header>
 <main>
   {{ content | safe }}
 </main>
 <footer>
-  <p>&copy; {{ "now" | date }} Your News Site | <a href="/sitemap.xml">Sitemap</a></p>
+  <p>&copy; {{ "now" | year }} {{ site.name }} | <a href="/sitemap.xml">Sitemap</a></p>
 </footer>
 </body>
 </html>

@@ -1,30 +1,18 @@
+{% for article in news %}
 ---
 layout: layout.njk
-title: News Archive - GlobalPulse
-pagination:
-  data: news
-  size: 10
-  alias: item
-permalink: "archive/page-{{ pagination.pageNumber + 1 }}/index.html"
+title: {{ article.title }}
+description: {{ article.description }}
+image: {{ article.image_url }}
+permalink: "articles/{{ article.title | slug }}/index.html"
 ---
-<h2>News Archive - Page {{ pagination.pageNumber + 1 }}</h2>
-
-{% for article in pagination.items %}
-  <div>
-    <h3><a href="/articles/{{ article.title | slug }}/">{{ article.title }}</a></h3>
-    {% if article.image_url %}
-      <img src="{{ article.image_url }}" alt="{{ article.title }}">
-    {% endif %}
-    <p>{{ article.description }}</p>
-    <small>{{ article.pubDate }}</small>
-  </div>
+<article>
+  <h1>{{ article.title }}</h1>
+  {% if article.image_url %}
+    <img src="{{ article.image_url }}" alt="{{ article.title }}">
+  {% endif %}
+  <p>{{ article.description }}</p>
+  <p><a href="{{ article.link }}" target="_blank" rel="noopener">Read Full Original Article</a></p>
+  <small>Published: {{ article.pubDate }}</small>
+</article>
 {% endfor %}
-
-<div>
-  {% if pagination.href.previous %}
-    <a href="{{ pagination.href.previous }}">Previous</a>
-  {% endif %}
-  {% if pagination.href.next %}
-    <a href="{{ pagination.href.next }}">Next</a>
-  {% endif %}
-</div>

@@ -8,7 +8,13 @@ layout: null
 {% for article in news %}
   <url>
     <loc>{{ site.url }}/articles/{{ article.title | slug }}/</loc>
-    <lastmod>{{ article.pubDate | dateISO }}</lastmod>
+    <lastmod>
+      {% if article.pubDate %}
+        {{ article.pubDate | dateISO }}
+      {% else %}
+        {{ "now" | dateISO }}
+      {% endif %}
+    </lastmod>
   </url>
 {% endfor %}
 <url>
