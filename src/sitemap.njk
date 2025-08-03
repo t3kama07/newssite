@@ -1,9 +1,18 @@
+---
+permalink: sitemap.xml
+eleventyExcludeFromCollections: true
+layout: null
+---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemmaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {% for article in news %}
   <url>
     <loc>{{ site.url }}/articles/{{ article.title | slug }}/</loc>
     <lastmod>{{ article.pubDate }}</lastmod>
   </url>
 {% endfor %}
+<url>
+  <loc>{{ site.url }}/</loc>
+  <lastmod>{{ "now" | date }}</lastmod>
+</url>
 </urlset>
