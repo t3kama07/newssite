@@ -1,17 +1,19 @@
 ---
 layout: layout.njk
-title: Latest News
-description: Breaking news updates
+title: GlobalPulse News - Latest Headlines
+description: Stay updated with breaking news and top stories from around the world.
 ---
-
 <h2>Latest News</h2>
-{% for article in news %}
+{% for article in news | slice(0,10) %}
   <div>
     <h3><a href="/articles/{{ article.title | slug }}/">{{ article.title }}</a></h3>
     {% if article.image_url %}
-      <img src="{{ article.image_url }}" alt="">
+      <img src="{{ article.image_url }}" alt="{{ article.title }}">
     {% endif %}
     <p>{{ article.description }}</p>
     <small>{{ article.pubDate }}</small>
   </div>
 {% endfor %}
+
+<hr>
+<p><a href="/archive/">View Older News</a></p>

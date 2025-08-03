@@ -1,17 +1,20 @@
+const fs = require("fs");
+const path = require("path");
+
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
-  // Date filter for sitemap (ISO format: YYYY-MM-DD)
+  // ISO date format for sitemap
   eleventyConfig.addFilter("dateISO", function(dateObj) {
     return new Date(dateObj).toISOString().split('T')[0];
   });
 
+  // Fallback date filter
   eleventyConfig.addFilter("date", function() {
-  return new Date().toISOString().split('T')[0];
-});
+    return new Date().toISOString().split('T')[0];
+  });
 
-
-  // Year filter for footer
+  // Footer year
   eleventyConfig.addFilter("year", function() {
     return new Date().getFullYear();
   });
@@ -21,10 +24,10 @@ module.exports = function(eleventyConfig) {
     return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
   });
 
-  // Custom collection: last 48 hours for Google News
+  // Custom collection for Google News (last 48 hrs)
   eleventyConfig.addCollection("recentNews", function(collectionApi) {
     const now = new Date();
-    const cutoff = new Date(now.getTime() - 48 * 60 * 60 * 1000); // 48 hours ago
+    const cutoff = new Date(now.getTime() - 48 * 60 * 60 * 1000);
     return collectionApi.getAll().filter(item => {
       return item.data.pubDate && new Date(item.data.pubDate) >= cutoff;
     });
@@ -37,7 +40,8 @@ module.exports = function(eleventyConfig) {
     },
     globalData: {
       site: {
-        url: "https://mellifluous-douhua-4b5e1f.netlify.app"
+        url: "https://mellifluous-douhua-4b5e1f.netlify.app",
+        name: "GlobalPulse News"
       }
     }
   };
