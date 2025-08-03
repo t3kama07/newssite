@@ -4,7 +4,7 @@ title: GlobalPulse News - Latest Headlines
 description: Stay updated with breaking news and top stories from around the world.
 ---
 <h2>Latest News</h2>
-{% if news.length > 0 %}
+{% if news and news.length %}
   {% for article in news | slice(0,10) %}
     <article>
       <h3><a href="/articles/{{ article.title | slug }}/">{{ article.title }}</a></h3>
@@ -16,7 +16,7 @@ description: Stay updated with breaking news and top stories from around the wor
     </article>
   {% endfor %}
 {% else %}
-  <p>No news available.</p>
+  <p>No news available at the moment.</p>
 {% endif %}
 
 <hr>
