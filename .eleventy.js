@@ -4,9 +4,13 @@ const path = require("path");
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
-  // ISO date format for sitemap
+  // ISO date format with fallback
   eleventyConfig.addFilter("dateISO", function(dateObj) {
-    return new Date(dateObj).toISOString().split('T')[0];
+    const d = new Date(dateObj);
+    if (isNaN(d)) {
+      return new Date().toISOString().split('T')[0]; // fallback to current date
+    }
+    return d.toISOString().split('T')[0];
   });
 
   // Fallback date filter
