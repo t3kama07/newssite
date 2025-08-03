@@ -36,29 +36,30 @@
   </style>
 
   <!-- Schema.org JSON-LD -->
-  {% if page.url contains '/articles/' %}
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": "{{ title | escape }}",
-    "image": ["{{ image }}"],
-    "datePublished": "{{ article.pubDate }}",
-    "author": {
-      "@type": "Organization",
-      "name": "Your News Site"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Your News Site",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "{{ site.url }}/logo.png"
-      }
+  {% if page.url and page.url.indexOf('/articles/') !== -1 %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "{{ title | escape }}",
+  "image": ["{{ image }}"],
+  "datePublished": "{{ article.pubDate }}",
+  "author": {
+    "@type": "Organization",
+    "name": "Your News Site"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Your News Site",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}/logo.png"
     }
   }
-  </script>
-  {% endif %}
+}
+</script>
+{% endif %}
+
 </head>
 <body>
 <header>
