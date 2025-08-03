@@ -1,6 +1,5 @@
-const fetch = require('node-fetch');
-
 module.exports = async function() {
+  const fetch = (await import('node-fetch')).default; // dynamic import for ESM module
   const apiKey = process.env.NEWS_API_KEY || "pub_4d769fbe2ebf41fcadaa09f967b608c5";
   const url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=us&language=en`;
 
