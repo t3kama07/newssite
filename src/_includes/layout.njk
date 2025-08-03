@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  {% include "seo.njk" %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; }
+    header, footer { text-align: center; margin: 20px; }
+    img { max-width: 100%; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Your News Site</h1>
+</header>
+<main>
+  {{ content | safe }}
+</main>
+<footer>
+  <p>&copy; {{ "now" | date("yyyy") }} Your News Site</p>
+</footer>
+<script data-ad-client="ca-pub-XXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</body>
+</html>
