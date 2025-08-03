@@ -8,11 +8,11 @@ layout: null
 {% for article in news %}
   <url>
     <loc>{{ site.url }}/articles/{{ article.title | slug }}/</loc>
-    <lastmod>{{ article.pubDate }}</lastmod>
+    <lastmod>{{ article.pubDate | dateISO }}</lastmod>
   </url>
 {% endfor %}
 <url>
   <loc>{{ site.url }}/</loc>
-  <lastmod>{{ "now" | date }}</lastmod>
+  <lastmod>{{ "now" | dateISO }}</lastmod>
 </url>
 </urlset>

@@ -6,6 +6,11 @@ module.exports = function(eleventyConfig) {
     return new Date(dateObj).toISOString().split('T')[0];
   });
 
+  eleventyConfig.addFilter("date", function() {
+  return new Date().toISOString().split('T')[0];
+});
+
+
   // Year filter for footer
   eleventyConfig.addFilter("year", function() {
     return new Date().getFullYear();
