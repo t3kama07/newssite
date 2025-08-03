@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 
-export default async function() {
+module.exports = async function() {
   const apiKey = process.env.NEWS_API_KEY || "pub_4d769fbe2ebf41fcadaa09f967b608c5";
   const url = `https://newsdata.io/api/1/latest?apikey=${apiKey}&country=us&language=en`;
 
@@ -17,4 +17,4 @@ export default async function() {
     image_url: article.image_url || "",
     category: article.category ? article.category[0] : "general"
   }));
-}
+};
