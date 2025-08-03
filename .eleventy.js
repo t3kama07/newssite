@@ -1,34 +1,24 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
 
-  // ISO date format with fallback
-  eleventyConfig.addFilter("dateISO", function(dateObj) {
-    const d = new Date(dateObj);
-    if (isNaN(d)) {
-      return new Date().toISOString().split('T')[0]; // fallback to current date
-    }
-    return d.toISOString().split('T')[0];
-  });
+  // Date filters
+  eleventyConfig.addFilter("dateISO", dateObj => new Date(dateObj).toISOString().split('T')[0]);
+  eleventyConfig.addFilter("date", () => new Date().toISOString().split('T')[0]);
+  eleventyConfig.addFilter("year", () => new Date().getFullYear());
 
-  // Fallback date filter
-  eleventyConfig.addFilter("date", function() {
-    return new Date().toISOString().split('T')[0];
-  });
-
-  // Footer year
-  eleventyConfig.addFilter("year", function() {
-    return new Date().getFullYear();
-  });
-
-  // Slug filter for URLs
-  eleventyConfig.addFilter("slug", function(value) {
+  // Slug filter
+  eleventyConfig.addFilter("slug", value => {
     return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
   });
 
-  // Custom collection for Google News (last 48 hrs)
+  // Collections
+  eleventyConfig.addCollection("articles", function(collectionApi) {
+    return collectionApi.getAll().filter(item => item.data && item.data.title);
+  });
+
   eleventyConfig.addCollection("recentNews", function(collectionApi) {
     const now = new Date();
     const cutoff = new Date(now.getTime() - 48 * 60 * 60 * 1000);

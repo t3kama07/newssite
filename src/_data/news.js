@@ -30,7 +30,6 @@ module.exports = async function () {
       archive = JSON.parse(fs.readFileSync(archivePath, 'utf8'));
     }
 
-    // Merge and deduplicate by title
     const merged = [...archive, ...newArticles].reduce((acc, curr) => {
       if (!acc.find(item => item.title === curr.title)) {
         acc.push(curr);
@@ -46,9 +45,7 @@ module.exports = async function () {
       return !isNaN(d) && d >= cutoff;
     });
 
-    // Save updated archive
     fs.writeFileSync(archivePath, JSON.stringify(filtered, null, 2));
-
     return filtered;
   } catch (error) {
     console.error("Fetch failed:", error);
@@ -56,7 +53,6 @@ module.exports = async function () {
   }
 };
 
-// Load archive if API fails
 function loadArchive() {
   const archivePath = path.join(__dirname, 'archive.json');
   if (fs.existsSync(archivePath)) {

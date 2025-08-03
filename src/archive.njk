@@ -1,13 +1,13 @@
 ---
 layout: layout.njk
-title: "News Archive - GlobalPulse"
+title: News Archive - GlobalPulse
 pagination:
   data: news
   size: 10
   alias: articles
-  addAllPagesToCollections: true
-permalink: "{% if pagination.pageNumber == 0 %}archive/{% else %}archive/page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+permalink: "archive/page-{{ pagination.pageNumber + 1 }}/index.html"
 ---
+
 <h2>News Archive - Page {{ pagination.pageNumber + 1 }}</h2>
 
 {% for article in articles %}
@@ -21,11 +21,11 @@ permalink: "{% if pagination.pageNumber == 0 %}archive/{% else %}archive/page-{{
   </article>
 {% endfor %}
 
-<div style="margin-top:20px;">
+<div>
   {% if pagination.href.previous %}
-    <a href="{{ pagination.href.previous }}">⬅ Previous</a>
+    <a href="{{ pagination.href.previous }}">Previous</a>
   {% endif %}
   {% if pagination.href.next %}
-    <a href="{{ pagination.href.next }}" style="float:right;">Next ➡</a>
+    <a href="{{ pagination.href.next }}">Next</a>
   {% endif %}
 </div>

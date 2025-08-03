@@ -3,6 +3,7 @@ layout: layout.njk
 title: GlobalPulse News - Latest Headlines
 description: Stay updated with breaking news and top stories from around the world.
 ---
+
 <h2>Latest News</h2>
 {% if news and news.length %}
   {% for article in news | slice(0,10) %}
